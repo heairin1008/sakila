@@ -23,16 +23,16 @@ public class StatsService {
 	}
 	
 	public Map<String, Object> getStats() {
-		Stats returnStats = null;
-		int totalStats = 0;
+		Stats returnStats = null; // 당일 방문자 수
+		int totalStats = 0; // 총 방문자 수 
 		Map<String, Object> map = null;
-		map = new HashMap<String, Object>();
+		map = new HashMap<String, Object>(); // service에서 값을 두 개 이상을 보내기 위해 map 사용
 		statsDao = new StatsDao();
 		Connection conn = null;
 		try {
-			DBUtil dbUtil = new DBUtil();
+			DBUtil dbUtil = new DBUtil(); // DB Connection 호출
 			conn = dbUtil.getConnection();
-			conn.setAutoCommit(false);
+			conn.setAutoCommit(false); // connection 자동으로 commit하지 않도록 설정
 			
 			Stats stats = this.getToday();
 			
@@ -45,8 +45,8 @@ public class StatsService {
 				statsDao.insertStats(conn, stats);
 			}
 			
-			map.put("returnStats", returnStats);
-			map.put("totalStats", totalStats);
+			map.put("returnStats", returnStats); // map에 당일 방문자 수 입력
+			map.put("totalStats", totalStats); // map에 총 방문자 수 입력
 			
 			conn.commit();
 		}catch (Exception e) {
@@ -74,12 +74,12 @@ public class StatsService {
 			DBUtil dbUtil = new DBUtil();
 			conn = dbUtil.getConnection();
 			conn.setAutoCommit(false);
-			//
+			
 			Stats stats = this.getToday();
 			
-			if(statsDao.selectDay(conn, stats) == null) {
+			if(statsDao.selectDay(conn, stats) == null) { // 당일 방문자 수가 0일 때
 				statsDao.insertStats(conn, stats);
-			}else {
+			}else { // 당일 방문자 수가 1 이상일 때
 				statsDao.updateStats(conn, stats);
 			}
 			conn.commit();
