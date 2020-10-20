@@ -12,7 +12,7 @@ public class StatsService {
 	
 	public Stats getToday() { // 오늘 날짜 구하는 메서드
 		Calendar today = Calendar.getInstance();
-		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-mm-dd");
 		String day = formater.format(today);
 		Stats stats = new Stats();
 		stats.setDay(day);
@@ -22,7 +22,7 @@ public class StatsService {
 	public Stats getStats() {
 		Stats returnStats = null;
 		statsDao = new StatsDao();
-		final String URL= "";
+		final String URL= "jdbc:mariadb://localhost:3306/sakila";
 		final String USER = "root";
 		final String PASSWORD = "java1004";
 		Connection conn = null;
@@ -35,13 +35,13 @@ public class StatsService {
 			returnStats = statsDao.selectDay(conn, stats);
 			conn.commit();
 		}catch (Exception e) {
-			try {
+			try { // 예외 발생 시 rollback
 				conn.rollback();
 			}catch (SQLException e1){
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
-		}finally {
+		}finally { // 무조건 실행
 			try {
 				conn.close();
 			}catch (SQLException e) {
@@ -53,7 +53,7 @@ public class StatsService {
 	
 	public void countStats() {
 		statsDao = new StatsDao();
-		final String URL= "";
+		final String URL= "jdbc:mariadb://localhost:3306/sakila";
 		final String USER = "root";
 		final String PASSWORD = "java1004";
 		Connection conn = null;
@@ -66,7 +66,7 @@ public class StatsService {
 			if(statsDao.selectDay(conn, stats) == null) {
 				statsDao.insertStats(conn, stats);
 			}else {
-				statsDao.updateStats(conn);
+				statsDao.updateStats(conn, stats);
 			}
 			conn.commit();
 		}catch (Exception e) {
