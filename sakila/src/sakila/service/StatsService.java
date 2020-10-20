@@ -3,6 +3,8 @@ package sakila.service;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import sakila.dao.StatsDao;
 import sakila.util.DBUtil;
@@ -20,22 +22,32 @@ public class StatsService {
 		return stats;
 	}
 	
-	public Stats getStats() {
+	public Map<String, Object> getStats() {
 		Stats returnStats = null;
+		int totalStats = 0;
+		Map<String, Object> map = null;
+		map = new HashMap<String, Object>();
 		statsDao = new StatsDao();
 		Connection conn = null;
 		try {
 			DBUtil dbUtil = new DBUtil();
 			conn = dbUtil.getConnection();
+			conn.setAutoCommit(false);
 			
 			Stats stats = this.getToday();
 			
 			returnStats = statsDao.selectDay(conn, stats);
+			totalStats = statsDao.selectTotalDay(conn, stats);
+			
 			if(returnStats != null) { //returnStats값이 있을 경우 updateStats실행
 				statsDao.updateStats(conn, stats);
 			}else { // returnStats값이 비어있을 경우 insertStats 실행
 				statsDao.insertStats(conn, stats);
 			}
+			
+			map.put("returnStats", returnStats);
+			map.put("totalStats", totalStats);
+			
 			conn.commit();
 		}catch (Exception e) {
 			try { // 예외 발생 시 rollback
@@ -51,7 +63,7 @@ public class StatsService {
 				e.printStackTrace();
 			}
 		}
-		return returnStats;
+		return map;
 	}
 	
 	public void countStats() {
@@ -61,6 +73,7 @@ public class StatsService {
 		try {
 			DBUtil dbUtil = new DBUtil();
 			conn = dbUtil.getConnection();
+			conn.setAutoCommit(false);
 			//
 			Stats stats = this.getToday();
 			

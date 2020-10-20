@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div>
-		오늘 접속자 수 : ${stats.count}
+		오늘 접속자 수 : ${map["returnStats"].cnt} / 총 접속자 수 : ${map["totalStats"]}
 	</div>
 	<form>
 		<div>

@@ -20,8 +20,8 @@ public class StatsDao {
 			returnStats = new Stats();
 			returnStats.setDay(rs.getString("day"));
 			System.out.println("debug : day(" + rs.getString("day") + ")");
-			returnStats.setCount(rs.getLong("cnt"));
-			System.out.println("debug : cnt(" + rs.getString("cnt") + ")");
+			returnStats.setCnt(rs.getLong("cnt"));
+			System.out.println("debug : cnt(" + rs.getLong("cnt") + ")");
 		}
 		return returnStats; // false -> 방문자가 없으면 insert 실행
 	}
@@ -40,5 +40,18 @@ public class StatsDao {
 		PreparedStatement stmt = conn.prepareStatement(StatsQuery.UPDATE_STATS);
 		stmt.setString(1, stats.getDay());
 		stmt.executeUpdate();
+	}
+	
+	// 총 방문자 출력
+	public int selectTotalDay(Connection conn, Stats stats) throws Exception{
+		System.out.println("debug : selectTotalDay 실행");
+		int returnStats = 0;
+		PreparedStatement stmt = conn.prepareStatement(StatsQuery.SELECT_TOTAL_DAY);
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			returnStats = rs.getInt("SUM(cnt)");
+			System.out.println("debug : SUM(cnt)(" + rs.getLong("SUM(cnt)") + ")");
+		}
+		return returnStats;
 	}
 }
