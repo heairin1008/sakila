@@ -11,6 +11,7 @@ public class StatsDao {
 	// 오늘 날짜에 방문자가 있는지(insert을 사용해야하는지 update를 사용해야하는지) 판단
 	// 방문자가 있으면 true, 없으면 false 출력
 	public Stats selectDay(Connection conn, Stats stats) throws Exception{
+		System.out.println("debug : selectDay 실행");
 		Stats returnStats = null;
 		PreparedStatement stmt = conn.prepareStatement(StatsQuery.SELECT_DAY);
 		stmt.setString(1, stats.getDay());
@@ -18,13 +19,16 @@ public class StatsDao {
 		if(rs.next()) {
 			returnStats = new Stats();
 			returnStats.setDay(rs.getString("day"));
-			returnStats.setCount(rs.getLong("count"));
+			System.out.println("debug : day(" + rs.getString("day") + ")");
+			returnStats.setCount(rs.getLong("cnt"));
+			System.out.println("debug : cnt(" + rs.getString("cnt") + ")");
 		}
 		return returnStats; // false -> 방문자가 없으면 insert 실행
 	}
 	
 	// 첫 방문자 카운트 추가
 	public void insertStats(Connection conn, Stats stats) throws Exception{
+		System.out.println("debug : insertStats 실행");
 		PreparedStatement stmt = conn.prepareStatement(StatsQuery.INSERT_STATS);
 		stmt.setString(1, stats.getDay());
 		stmt.executeUpdate();
@@ -32,6 +36,7 @@ public class StatsDao {
 	
 	// 방문자수 카운트 추가
 	public void updateStats(Connection conn, Stats stats) throws Exception{
+		System.out.println("debug : updateStats 실행");
 		PreparedStatement stmt = conn.prepareStatement(StatsQuery.UPDATE_STATS);
 		stmt.setString(1, stats.getDay());
 		stmt.executeUpdate();
