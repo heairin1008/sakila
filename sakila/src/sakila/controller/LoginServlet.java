@@ -8,20 +8,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import sakila.service.StatsService;
+import sakila.vo.Stats;
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
+	private StatsService statsService;
 
-	// ·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿
+	// ë¡œê·¸ì¸ í¼ìœ¼ë¡œ ì´ë™
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginStaff") != null) { // ·Î±×ÀÎ ¼¼¼Ç°ªÀÌ ÀÖ´Ù¸é ÀÎµ¦½º ÆäÀÌÁö·Î ÀÌµ¿
+		if(session.getAttribute("loginStaff") != null) { // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
 			response.sendRedirect(request.getContextPath() + "/auth/IndexServlet");
 			return;
 		}
+		statsService = new StatsService();
+		Stats stats = statsService.getStats();
+		request.setAttribute("stats", stats);
+		
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 	}
 
-	// ·Î±×ÀÎ ¾×¼ÇÀ¸·Î ÀÌµ¿
+	// ë¡œê·¸ì¸ ì•¡ì…˜ìœ¼ë¡œ ì´ë™
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
