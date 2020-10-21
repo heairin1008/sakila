@@ -9,11 +9,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter("/*") // ¸ğµç È°µ¿µéÀÌ encodingFilter¸¦ ¿ì¼±À¸·Î °ÅÃÄ°¨(?)
+@WebFilter("/*") // ëª¨ë“  í™œë™ë“¤ì´ encodingFilterë¥¼ ìš°ì„ ìœ¼ë¡œ ê±°ì³ê°
 public class EncodingFilter implements Filter {
-   // request ÀÎÄÚµù ÇÊÅÍ -> ¸ğµç requestµéÀ» setCharacterEncoding("utf-8"); ÇØÁØ´Ù?
+	// request ì¸ì½”ë”© í•„í„° -> ëª¨ë“  requestë“¤ì„ setCharacterEncoding("utf-8"); í•´ì¤€ë‹¤
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("EncodingFileter ½ÇÇà : request utf-8 ÀÎÄÚµù");
+		System.out.println("EncodingFileter ì‹¤í–‰ : request utf-8 ì¸ì½”ë”©");
 		request.setCharacterEncoding("utf-8");
 		chain.doFilter(request, response);
 	}

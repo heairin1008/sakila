@@ -16,14 +16,14 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter("/auth/*") // EncodingFilter¸¦ °ÅÃÄ°£ °Íµé Áß auth¿¡ Æ÷ÇÔµÈ °Íµé¸¸ °ÅÃÄ°¨
+@WebFilter("/auth/*") // EncodingFilterë¥¼ ê±°ì³ê°„ ê²ƒë“¤ ì¤‘ authì— í¬í•¨ëœ ê²ƒë“¤ë§Œ ê±°ì³ê°
 public class LoginFilter implements Filter {
-	// ÀÎÁõÆäÀÌÁö ¼¼¼Ç °Ë»ç ÇÊÅÍ
+	// ì¸ì¦í˜ì´ì§€ ì„¸ì…˜ ê²€ì‚¬ í•„í„°
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("LoginFilter ½ÇÇà : session °Ë»ç");
-		HttpSession session = ((HttpServletRequest)request).getSession(); // ¼¼¼Ç °¡Á®¿À±â
-		if(session.getAttribute("loginStaff") == null) { // ·Î±×ÀÎ ¼¼¼Ç°ªÀÌ ¾øÀ¸¸é ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿
-			System.out.println("·Î±×ÀÎ ÈÄ Á¢±Ù");
+		System.out.println("LoginFilter ï¿½ï¿½ï¿½ï¿½ : session ï¿½Ë»ï¿½");
+		HttpSession session = ((HttpServletRequest)request).getSession(); // ì„¸ì…˜ ê°€ì ¸ì˜¤ê¸°
+		if(session.getAttribute("loginStaff") == null) { // ë¡œê·¸ì¸ ì„¸ì…˜ê°’ì´ ì—†ìœ¼ë©´ ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ì´ë™
+			System.out.println("ë¡œê·¸ì¸ í›„ ì ‘ê·¼");
 			((HttpServletResponse)response).sendRedirect(request.getServletContext().getContextPath()+"/LoginServlet");
 			return;
 		}
