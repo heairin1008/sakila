@@ -52,6 +52,9 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("staffId", staffId);
 			request.setAttribute("userName", userName);
 			
+			//session
+			HttpSession session = request.getSession();
+			session.setAttribute("loginStaff", userName);
 			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
 			// session담고 IndexServlet 포워딩
 			System.out.println("로그인 성공");
