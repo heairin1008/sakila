@@ -19,7 +19,7 @@
 		<table style="margin : auto; width : 300px;">
 			<tr>
 				<td style="padding-buttom : 20px; text-align : center;">
-					<i class='fa fa-user-circle' style='font-size:96px;'></i>
+					<i class='fa fa-user-circle' style='font-size:96px; color : gray;'></i>
 				</td>
 			</tr>
 			<tr>

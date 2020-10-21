@@ -18,9 +18,9 @@ public class StaffService {
 		try {
 			DBUtil dbUtil = new DBUtil();
 			conn = dbUtil.getConnection();
-			conn.setAutoCommit(false);
+			conn.setAutoCommit(false); // connection이 자동으로 commit되지 않게 막아줌
 			
-			returnStaff = staffDao.selectStaffByKey(conn, staff);
+			returnStaff = staffDao.selectStaffByKey(conn, staff); // id / username값을 넣어줌
 
 			conn.commit();
 		}catch (Exception e) {
