@@ -11,13 +11,13 @@ public class StaffDao {
 		System.out.println("debug : selectStaffByKey 실행"); // 실행되는지 확인
 		Staff returnStaff = null;
 		PreparedStatement stmt = conn.prepareStatement(StaffQuery.SELECT_STAFF_BY_KEY);
-		stmt.setInt(1, staff.getStaffId());
+		stmt.setString(1, staff.getEmail());
 		stmt.setString(2, staff.getPassword());
 		ResultSet rs = stmt.executeQuery();
 		if(rs.next()) {
 			returnStaff = new Staff();
-			returnStaff.setStaffId(rs.getInt("staff_id"));
-			System.out.println("debug : staffId(" + rs.getInt("staff_id") + ")"); // staff_id값 확인
+			returnStaff.setEmail(rs.getString("email"));
+			System.out.println("debug : staffId(" + rs.getString("email") + ")"); // staff_id값 확인
 			returnStaff.setUserName(rs.getString("username"));
 			System.out.println("debug : userName(" + rs.getString("username") + ")"); // username값 확인
 		}

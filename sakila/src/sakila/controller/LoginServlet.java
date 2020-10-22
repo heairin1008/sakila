@@ -39,10 +39,10 @@ public class LoginServlet extends HttpServlet {
 		staffService = new StaffService();
 		Staff staff = new Staff(); 
 		// login.jsp에서 id / password값 받아오기
-		int staffId = Integer.parseInt(request.getParameter("id"));
+		String staffId = request.getParameter("id");
 		String password = request.getParameter("password");
 		// staff에 id / password값 넣기
-		staff.setStaffId(staffId);
+		staff.setEmail(staffId);
 		staff.setPassword(password);
 		Staff returnStaff = staffService.getStaffByKey(staff);
 		
@@ -55,7 +55,7 @@ public class LoginServlet extends HttpServlet {
 			//session
 			HttpSession session = request.getSession();
 			session.setAttribute("loginStaff", userName);
-			request.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/auth/IndexServlet");
 			// session담고 IndexServlet 포워딩
 			System.out.println("로그인 성공");
 			return;
