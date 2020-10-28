@@ -7,14 +7,14 @@ import javax.servlet.http.HttpSessionListener;
 import sakila.service.StatsService;
 
 @WebListener
-public class StatsListener implements HttpSessionListener { // ì„¸ì…˜ì´ ìƒì„±ë˜ëŠ” ê²ƒì„ ê°ì§€
+public class StatsListener implements HttpSessionListener { // ¼¼¼ÇÀÌ »ı¼ºµÇ´Â °ÍÀ» °¨Áö
 	private StatsService statsService;
     public StatsListener() {
 
     }
 
-    public void sessionCreated(HttpSessionEvent se)  { // ì„¸ì…˜ì´ ìƒì„±ë˜ì—ˆëŠ”ì§€ë¥¼ ì´ë²¤íŠ¸ë¥¼ í†µí•´ í™•ì¸ ê°€ëŠ¥
-    	if(se.getSession().isNew()) { // ìƒˆë¡œìš´ ì„¸ì…˜ì´ ìƒì„±ë˜ì—ˆì„ ë•Œ
+    public void sessionCreated(HttpSessionEvent se)  { // ¼¼¼ÇÀÌ »ı¼ºµÇ¾ú´ÂÁö¸¦ ÀÌº¥Æ®¸¦ ÅëÇØ È®ÀÎ °¡´É
+    	if(se.getSession().isNew()) { // »õ·Î¿î ¼¼¼ÇÀÌ »ı¼ºµÇ¾úÀ» ¶§
     		statsService = new StatsService();
     		statsService.countStats();
     	}

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class LoginFilter implements Filter {
 	// 인증페이지 세션 검사 필터
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("LoginFilter 실행 : session 검사");
+		System.out.println("LoginFilter ���� : session �˻�");
 		HttpSession session = ((HttpServletRequest)request).getSession(); // 세션 가져오기
 		if(session.getAttribute("loginStaff") == null) { // 로그인 세션값이 없으면 로그인 페이지로 이동
 			System.out.println("로그인 후 접근");

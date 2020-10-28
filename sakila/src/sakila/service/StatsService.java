@@ -23,7 +23,7 @@ public class StatsService {
 	}
 	
 	public Map<String, Object> getStats() {
-		Stats returnStats = null; // 당일 방문자 수
+		Stats returnStats = null; // 당일 방문자 수 
 		int totalStats = 0; // 총 방문자 수 
 		Map<String, Object> map = null;
 		map = new HashMap<String, Object>(); // service에서 값을 두 개 이상을 보내기 위해 map 사용
@@ -32,7 +32,7 @@ public class StatsService {
 		try {
 			DBUtil dbUtil = new DBUtil(); // DB Connection 호출
 			conn = dbUtil.getConnection();
-			conn.setAutoCommit(false); // connection 자동으로 commit하지 않도록 설정
+			conn.setAutoCommit(false); // conn이 자동적으로 commit되는걸 막음
 			
 			Stats stats = this.getToday();
 			
