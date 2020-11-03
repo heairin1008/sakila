@@ -23,7 +23,7 @@
 				<td>서울 지점</td>
 			</tr>
 			<tr>
-				<td>${loginStaff}관리자님</td>
+				<td><a href="${pageContext.request.contextPath}/auth/StaffInfoServlet">${loginStaff}관리자님</a></td>
 			</tr>
 		</table>
 		
@@ -34,7 +34,7 @@
 		<h3>Menu</h3>
 			<ul class="linkedList">
 				<li class="line">
-					<a href="#">홈</a>
+					<a href="${pageContext.request.contextPath}/auth/IndexServlet">홈</a>
 				</li>
 				<li>
 					<a href="#">영화 반납</a>

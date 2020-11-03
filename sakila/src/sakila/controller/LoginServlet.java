@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 			
 			//session
 			HttpSession session = request.getSession();
-			session.setAttribute("loginStaff", userName);
+			session.setAttribute("loginStaff", returnStaff);
 			response.sendRedirect(request.getContextPath() + "/auth/IndexServlet");
 			// session담고 IndexServlet 포워딩
 			System.out.println("로그인 성공");

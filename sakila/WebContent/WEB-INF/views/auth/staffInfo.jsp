@@ -21,7 +21,27 @@
 					<h2>관리자 상세정보</h2>
 					<table>
 						<tr>
-							
+							<td>별명 : </td>
+							<td>${staffInfo.username}</td>
+						</tr>
+						<tr>
+							<td>이름 : </td>
+							<td>${staffInfo.fullname}</td>
+						</tr>
+						<tr>
+							<td>연락처 : </td>
+							<td>${staffInfo.phone}</td>
+						</tr>
+						<tr>
+							<td>주소 : </td>
+							<td>${staffInfo.address}, ${staffInfo.city}, ${staffInfo.country}</td>
+						</tr>
+						<tr>
+							<td colspan = "2">${staffInfo.city}, ${staffInfo.country}</td>
+						</tr>
+						<tr>
+							<td>E-mail : </td>
+							<td>${staffInfo.email}</td>
 						</tr>
 					</table>
 					<br class="clear" />
